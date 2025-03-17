@@ -7,12 +7,19 @@
  */
 
 @import 'https://fonts.googleapis.com/css?family=Reenie+Beanie';
-@import 'tailwindcss';
+
+@layer theme,  components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
 @plugin 'glare-typography';
 @plugin 'glare-themes';
 @plugin 'glare-torch-mode';
 @plugin 'tailwind-scrollbar-hide';
 @plugin 'tailwindcss-animate';
+
+@layer base {
+}
 
 body {
   margin: 0;
@@ -25,7 +32,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #eee;
-  padding: 0 20px;
 }
 
 header {

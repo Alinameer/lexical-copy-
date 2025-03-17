@@ -212,7 +212,7 @@ function App(): JSX.Element {
       <SharedHistoryContext>
         <TableContext>
           <ToolbarContext>
-            <div className="editor-shell">
+            <div>
               <Editor />
             </div>
             <Settings />

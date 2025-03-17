@@ -735,36 +735,39 @@ export default function ToolbarPlugin({
   const canViewerSeeInsertCodeButton = !toolbarState.isImageCaption;
 
   return (
-    <div className="toolbar  1self-stretch !h-[42px] !items-center !gap-[2px] !rounded-[4px] !border-b !border-[var(--Border-Presentation-Global-Primary,#d4d4d4)] !bg-[var(--Background-Presentation-Form-Header,rgba(255,255,255,0.2))] !p-[5px] !pr-2 shadow-[0px_2px_9px_0px_var(--Background-Presentation-Form-Header-Shadow,rgba(0,0,0,0.1))] !backdrop-blur-[8px]">
+    <div className="toolbar  !h-[42px] !items-center !gap-[2px] !self-stretch !rounded-[4px] !border-b !border-[var(--Border-Presentation-Global-Primary,#d4d4d4)] !bg-[var(--Background-Presentation-Form-Header,rgba(255,255,255,0.2))] !p-[5px] !pr-2 shadow-[0px_2px_9px_0px_var(--Background-Presentation-Form-Header-Shadow,rgba(0,0,0,0.1))] !backdrop-blur-[8px]">
       <a href="/">
-        <Button size="S" variant="BorderStyle">
+        <Button className="leading-none" size="S" variant="BorderStyle">
           <i className="ri-arrow-left-s-line"></i>
           Editor
         </Button>
       </a>
-      <button
+      <div className="bg-border-presentation-global-primary h-[28px] w-[1px]" />
+      <Button
+        size="S"
+        variant={'BlueContStyle'}
         disabled={!toolbarState.canUndo || !isEditable}
         onClick={() => {
           activeEditor.dispatchCommand(UNDO_COMMAND, undefined);
         }}
         title={IS_APPLE ? 'Undo (⌘Z)' : 'Undo (Ctrl+Z)'}
         type="button"
-        className="toolbar-item spaced"
         aria-label="Undo">
         <i className="ri-arrow-go-back-line"></i>
-      </button>
-      <button
+      </Button>
+      <Button
+        size="S"
+        variant={'BlueContStyle'}
         disabled={!toolbarState.canRedo || !isEditable}
         onClick={() => {
           activeEditor.dispatchCommand(REDO_COMMAND, undefined);
         }}
         title={IS_APPLE ? 'Redo (⇧⌘Z)' : 'Redo (Ctrl+Y)'}
         type="button"
-        className="toolbar-item"
         aria-label="Redo">
         <i className="ri-arrow-go-forward-line"></i>
-      </button>
-      <Divider />
+      </Button>
+      <div className="bg-border-presentation-global-primary h-[28px] w-[1px]" />
       {toolbarState.blockType in blockTypeToBlockName &&
         activeEditor === editor && (
           <>
@@ -811,33 +814,33 @@ export default function ToolbarPlugin({
             disabled={!isEditable}
           />
           <Divider />
-          <button
+          <Button
+            size="S"
+            variant={'BlueContStyle'}
             disabled={!isEditable}
             onClick={() => {
               activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
             }}
-            className={
-              'toolbar-item spaced ' + (toolbarState.isBold ? 'active' : '')
-            }
             title={`Bold (${SHORTCUTS.BOLD})`}
             type="button"
             aria-label={`Format text as bold. Shortcut: ${SHORTCUTS.BOLD}`}>
-            <i className="format bold" />
-          </button>
-          <button
+            <i className="ri-bold"></i>
+          </Button>
+          <Button
+            size="S"
+            variant={'BlueContStyle'}
             disabled={!isEditable}
             onClick={() => {
               activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');
             }}
-            className={
-              'toolbar-item spaced ' + (toolbarState.isItalic ? 'active' : '')
-            }
             title={`Italic (${SHORTCUTS.ITALIC})`}
             type="button"
             aria-label={`Format text as italics. Shortcut: ${SHORTCUTS.ITALIC}`}>
-            <i className="format italic" />
-          </button>
-          <button
+            <i className="ri-italic"></i>
+          </Button>
+          <Button
+            size="S"
+            variant={'BlueContStyle'}
             disabled={!isEditable}
             onClick={() => {
               activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
@@ -849,10 +852,12 @@ export default function ToolbarPlugin({
             title={`Underline (${SHORTCUTS.UNDERLINE})`}
             type="button"
             aria-label={`Format text to underlined. Shortcut: ${SHORTCUTS.UNDERLINE}`}>
-            <i className="format underline" />
-          </button>
+            <i className="ri-underline"></i>
+          </Button>
           {canViewerSeeInsertCodeButton && (
-            <button
+            <Button
+              size="S"
+              variant={'BlueContStyle'}
               disabled={!isEditable}
               onClick={() => {
                 activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code');
@@ -863,10 +868,12 @@ export default function ToolbarPlugin({
               title={`Insert code block (${SHORTCUTS.INSERT_CODE_BLOCK})`}
               type="button"
               aria-label="Insert code block">
-              <i className="format code" />
-            </button>
+              <i className="ri-code-line"></i>
+            </Button>
           )}
-          <button
+          <Button
+            size="S"
+            variant={'BlueContStyle'}
             disabled={!isEditable}
             onClick={insertLink}
             className={
@@ -875,8 +882,8 @@ export default function ToolbarPlugin({
             aria-label="Insert link"
             title={`Insert link (${SHORTCUTS.INSERT_LINK})`}
             type="button">
-            <i className="format link" />
-          </button>
+            <i className="ri-link"></i>
+          </Button>
           <DropdownColorPicker
             disabled={!isEditable}
             buttonClassName="toolbar-item color-picker"
