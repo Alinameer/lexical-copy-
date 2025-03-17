@@ -93,6 +93,7 @@ import {
   formatParagraph,
   formatQuote,
 } from './utils';
+import {Button} from '../../../components/Button';
 
 const rootTypeToRootName = {
   root: 'Root',
@@ -735,6 +736,12 @@ export default function ToolbarPlugin({
 
   return (
     <div className="toolbar  1self-stretch !h-[42px] !items-center !gap-[2px] !rounded-[4px] !border-b !border-[var(--Border-Presentation-Global-Primary,#d4d4d4)] !bg-[var(--Background-Presentation-Form-Header,rgba(255,255,255,0.2))] !p-[5px] !pr-2 shadow-[0px_2px_9px_0px_var(--Background-Presentation-Form-Header-Shadow,rgba(0,0,0,0.1))] !backdrop-blur-[8px]">
+      <a href="/">
+        <Button size="S" variant="BorderStyle">
+          <i className="ri-arrow-left-s-line"></i>
+          Editor
+        </Button>
+      </a>
       <button
         disabled={!toolbarState.canUndo || !isEditable}
         onClick={() => {
