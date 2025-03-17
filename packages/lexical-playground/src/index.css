@@ -8,6 +8,11 @@
 
 @import 'https://fonts.googleapis.com/css?family=Reenie+Beanie';
 @import 'tailwindcss';
+@plugin 'glare-typography';
+@plugin 'glare-themes';
+@plugin 'glare-torch-mode';
+@plugin 'tailwind-scrollbar-hide';
+@plugin 'tailwindcss-animate';
 
 body {
   margin: 0;
