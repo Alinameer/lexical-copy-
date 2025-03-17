@@ -94,6 +94,7 @@ import {
   formatQuote,
 } from './utils';
 import {Button} from '../../../components/Button';
+import {Tooltip} from '../../../components/Tooltip';
 
 const rootTypeToRootName = {
   root: 'Root',
@@ -737,36 +738,44 @@ export default function ToolbarPlugin({
   return (
     <div className="toolbar  !h-[42px] !items-center !gap-[2px] !self-stretch !rounded-[4px] !border-b !border-[var(--Border-Presentation-Global-Primary,#d4d4d4)] !bg-[var(--Background-Presentation-Form-Header,rgba(255,255,255,0.2))] !p-[5px] !pr-2 shadow-[0px_2px_9px_0px_var(--Background-Presentation-Form-Header-Shadow,rgba(0,0,0,0.1))] !backdrop-blur-[8px]">
       <a href="/">
-        <Button className="leading-none" size="S" variant="BorderStyle">
+        <Button className="leading-none" size="M" variant="BorderStyle">
           <i className="ri-arrow-left-s-line"></i>
           Editor
         </Button>
       </a>
       <div className="bg-border-presentation-global-primary h-[28px] w-[1px]" />
-      <Button
-        size="S"
-        variant={'BlueContStyle'}
-        disabled={!toolbarState.canUndo || !isEditable}
-        onClick={() => {
-          activeEditor.dispatchCommand(UNDO_COMMAND, undefined);
-        }}
-        title={IS_APPLE ? 'Undo (⌘Z)' : 'Undo (Ctrl+Z)'}
-        type="button"
-        aria-label="Undo">
-        <i className="ri-arrow-go-back-line"></i>
-      </Button>
-      <Button
-        size="S"
-        variant={'BlueContStyle'}
-        disabled={!toolbarState.canRedo || !isEditable}
-        onClick={() => {
-          activeEditor.dispatchCommand(REDO_COMMAND, undefined);
-        }}
-        title={IS_APPLE ? 'Redo (⇧⌘Z)' : 'Redo (Ctrl+Y)'}
-        type="button"
-        aria-label="Redo">
-        <i className="ri-arrow-go-forward-line"></i>
-      </Button>
+      <Tooltip
+        toolTipSide="left"
+        text={IS_APPLE ? 'Undo (⌘Z)' : 'Undo (Ctrl+Z)'}>
+        <Button
+          size="M"
+          variant="BlueContStyle"
+          disabled={!toolbarState.canUndo || !isEditable}
+          onClick={() => {
+            activeEditor.dispatchCommand(UNDO_COMMAND, undefined);
+          }}
+          type="button"
+          aria-label="Undo">
+          <i className="ri-arrow-go-back-line"></i>
+        </Button>
+      </Tooltip>
+
+      <Tooltip
+        toolTipSide="left"
+        text={IS_APPLE ? 'Redo (⇧⌘Z)' : 'Redo (Ctrl+Y)'}>
+        <Button
+          size="M"
+          variant="BlueContStyle"
+          disabled={!toolbarState.canRedo || !isEditable}
+          onClick={() => {
+            activeEditor.dispatchCommand(REDO_COMMAND, undefined);
+          }}
+          type="button"
+          aria-label="Redo">
+          <i className="ri-arrow-go-forward-line"></i>
+        </Button>
+      </Tooltip>
+
       <div className="bg-border-presentation-global-primary h-[28px] w-[1px]" />
       {toolbarState.blockType in blockTypeToBlockName &&
         activeEditor === editor && (
@@ -814,76 +823,92 @@ export default function ToolbarPlugin({
             disabled={!isEditable}
           />
           <Divider />
-          <Button
-            size="S"
-            variant={'BlueContStyle'}
-            disabled={!isEditable}
-            onClick={() => {
-              activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
-            }}
-            title={`Bold (${SHORTCUTS.BOLD})`}
-            type="button"
-            aria-label={`Format text as bold. Shortcut: ${SHORTCUTS.BOLD}`}>
-            <i className="ri-bold"></i>
-          </Button>
-          <Button
-            size="S"
-            variant={'BlueContStyle'}
-            disabled={!isEditable}
-            onClick={() => {
-              activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');
-            }}
-            title={`Italic (${SHORTCUTS.ITALIC})`}
-            type="button"
-            aria-label={`Format text as italics. Shortcut: ${SHORTCUTS.ITALIC}`}>
-            <i className="ri-italic"></i>
-          </Button>
-          <Button
-            size="S"
-            variant={'BlueContStyle'}
-            disabled={!isEditable}
-            onClick={() => {
-              activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
-            }}
-            className={
-              'toolbar-item spaced ' +
-              (toolbarState.isUnderline ? 'active' : '')
-            }
-            title={`Underline (${SHORTCUTS.UNDERLINE})`}
-            type="button"
-            aria-label={`Format text to underlined. Shortcut: ${SHORTCUTS.UNDERLINE}`}>
-            <i className="ri-underline"></i>
-          </Button>
-          {canViewerSeeInsertCodeButton && (
+          <Tooltip text={`Bold (${SHORTCUTS.BOLD})`} toolTipSide="left">
             <Button
-              size="S"
-              variant={'BlueContStyle'}
+              size="M"
+              variant="BlueContStyle"
               disabled={!isEditable}
               onClick={() => {
-                activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code');
+                activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
+              }}
+              type="button"
+              aria-label={`Format text as bold. Shortcut: ${SHORTCUTS.BOLD}`}>
+              <i className="ri-bold"></i>
+            </Button>
+          </Tooltip>
+
+          <Tooltip text={`Italic (${SHORTCUTS.ITALIC})`} toolTipSide="left">
+            <Button
+              size="M"
+              variant="BlueContStyle"
+              disabled={!isEditable}
+              onClick={() => {
+                activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');
+              }}
+              type="button"
+              aria-label={`Format text as italics. Shortcut: ${SHORTCUTS.ITALIC}`}>
+              <i className="ri-italic"></i>
+            </Button>
+          </Tooltip>
+
+          <Tooltip
+            text={`Underline (${SHORTCUTS.UNDERLINE})`}
+            toolTipSide="left">
+            <Button
+              size="M"
+              variant="BlueContStyle"
+              disabled={!isEditable}
+              onClick={() => {
+                activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
               }}
               className={
-                'toolbar-item spaced ' + (toolbarState.isCode ? 'active' : '')
+                'toolbar-item spaced ' +
+                (toolbarState.isUnderline ? 'active' : '')
               }
-              title={`Insert code block (${SHORTCUTS.INSERT_CODE_BLOCK})`}
               type="button"
-              aria-label="Insert code block">
-              <i className="ri-code-line"></i>
+              aria-label={`Format text to underlined. Shortcut: ${SHORTCUTS.UNDERLINE}`}>
+              <i className="ri-underline"></i>
             </Button>
+          </Tooltip>
+
+          {canViewerSeeInsertCodeButton && (
+            <Tooltip
+              text={`Insert code block (${SHORTCUTS.INSERT_CODE_BLOCK})`}
+              toolTipSide="left">
+              <Button
+                size="M"
+                variant="BlueContStyle"
+                disabled={!isEditable}
+                onClick={() => {
+                  activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code');
+                }}
+                className={
+                  'toolbar-item spaced ' + (toolbarState.isCode ? 'active' : '')
+                }
+                type="button"
+                aria-label="Insert code block">
+                <i className="ri-code-line"></i>
+              </Button>
+            </Tooltip>
           )}
-          <Button
-            size="S"
-            variant={'BlueContStyle'}
-            disabled={!isEditable}
-            onClick={insertLink}
-            className={
-              'toolbar-item spaced ' + (toolbarState.isLink ? 'active' : '')
-            }
-            aria-label="Insert link"
-            title={`Insert link (${SHORTCUTS.INSERT_LINK})`}
-            type="button">
-            <i className="ri-link"></i>
-          </Button>
+
+          <Tooltip
+            text={`Insert link (${SHORTCUTS.INSERT_LINK})`}
+            toolTipSide="left">
+            <Button
+              size="M"
+              variant="BlueContStyle"
+              disabled={!isEditable}
+              onClick={insertLink}
+              className={
+                'toolbar-item spaced ' + (toolbarState.isLink ? 'active' : '')
+              }
+              type="button"
+              aria-label="Insert link">
+              <i className="ri-link"></i>
+            </Button>
+          </Tooltip>
+
           <DropdownColorPicker
             disabled={!isEditable}
             buttonClassName="toolbar-item color-picker"

@@ -212,9 +212,7 @@ function App(): JSX.Element {
       <SharedHistoryContext>
         <TableContext>
           <ToolbarContext>
-            <div>
-              <Editor />
-            </div>
+            <Editor />
             <Settings />
             {isDevPlayground ? <DocsPlugin /> : null}
             {isDevPlayground ? <PasteLogPlugin /> : null}

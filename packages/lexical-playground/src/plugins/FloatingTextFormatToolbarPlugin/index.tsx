@@ -33,6 +33,8 @@ import {getDOMRangeRect} from '../../utils/getDOMRangeRect';
 import {getSelectedNode} from '../../utils/getSelectedNode';
 import {setFloatingElemPosition} from '../../utils/setFloatingElemPosition';
 import {INSERT_INLINE_COMMAND} from '../CommentPlugin';
+import {Button} from '../../../components/Button';
+import {Tooltip} from '../../../components/Tooltip';
 
 function TextFormatFloatingToolbar({
   editor,
@@ -195,124 +197,169 @@ function TextFormatFloatingToolbar({
     <div ref={popupCharStylesEditorRef} className="floating-text-format-popup">
       {editor.isEditable() && (
         <>
-          <button
-            type="button"
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
-            }}
-            className={'popup-item spaced ' + (isBold ? 'active' : '')}
-            title="Bold"
-            aria-label="Format text as bold">
-            <i className="format bold" />
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');
-            }}
-            className={'popup-item spaced ' + (isItalic ? 'active' : '')}
-            title="Italic"
-            aria-label="Format text as italics">
-            <i className="format italic" />
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
-            }}
-            className={'popup-item spaced ' + (isUnderline ? 'active' : '')}
-            title="Underline"
-            aria-label="Format text to underlined">
-            <i className="format underline" />
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough');
-            }}
-            className={'popup-item spaced ' + (isStrikethrough ? 'active' : '')}
-            title="Strikethrough"
-            aria-label="Format text with a strikethrough">
-            <i className="format strikethrough" />
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'subscript');
-            }}
-            className={'popup-item spaced ' + (isSubscript ? 'active' : '')}
-            title="Subscript"
-            aria-label="Format Subscript">
-            <i className="format subscript" />
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'superscript');
-            }}
-            className={'popup-item spaced ' + (isSuperscript ? 'active' : '')}
-            title="Superscript"
-            aria-label="Format Superscript">
-            <i className="format superscript" />
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'uppercase');
-            }}
-            className={'popup-item spaced ' + (isUppercase ? 'active' : '')}
-            title="Uppercase"
-            aria-label="Format text to uppercase">
-            <i className="format uppercase" />
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'lowercase');
-            }}
-            className={'popup-item spaced ' + (isLowercase ? 'active' : '')}
-            title="Lowercase"
-            aria-label="Format text to lowercase">
-            <i className="format lowercase" />
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'capitalize');
-            }}
-            className={'popup-item spaced ' + (isCapitalize ? 'active' : '')}
-            title="Capitalize"
-            aria-label="Format text to capitalize">
-            <i className="format capitalize" />
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code');
-            }}
-            className={'popup-item spaced ' + (isCode ? 'active' : '')}
-            title="Insert code block"
-            aria-label="Insert code block">
-            <i className="format code" />
-          </button>
-          <button
-            type="button"
-            onClick={insertLink}
-            className={'popup-item spaced ' + (isLink ? 'active' : '')}
-            title="Insert link"
-            aria-label="Insert link">
-            <i className="format link" />
-          </button>
+          <Tooltip text="Bold">
+            <Button
+              size="M"
+              variant="BlueContStyle"
+              type="button"
+              onClick={() => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
+              }}
+              className={'popup-item spaced ' + (isBold ? 'active' : '')}
+              aria-label="Format text as bold">
+              <i className="format bold" />
+            </Button>
+          </Tooltip>
+
+          <Tooltip text="Italic">
+            <Button
+              size="M"
+              variant="BlueContStyle"
+              type="button"
+              onClick={() => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');
+              }}
+              className={'popup-item spaced ' + (isItalic ? 'active' : '')}
+              aria-label="Format text as italics">
+              <i className="ri-italic"></i>
+            </Button>
+          </Tooltip>
+
+          <Tooltip text="Underline">
+            <Button
+              size="M"
+              variant="BlueContStyle"
+              type="button"
+              onClick={() => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
+              }}
+              className={'popup-item spaced ' + (isUnderline ? 'active' : '')}
+              aria-label="Format text to underlined">
+              <i className="ri-underline"></i>
+            </Button>
+          </Tooltip>
+
+          <Tooltip text="Strikethrough">
+            <Button
+              size="M"
+              variant="BlueContStyle"
+              type="button"
+              onClick={() => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough');
+              }}
+              className={
+                'popup-item spaced ' + (isStrikethrough ? 'active' : '')
+              }
+              aria-label="Format text with a strikethrough">
+              <i className="ri-strikethrough"></i>
+            </Button>
+          </Tooltip>
+
+          <Tooltip text="Subscript">
+            <Button
+              size="M"
+              variant="BlueContStyle"
+              type="button"
+              onClick={() => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'subscript');
+              }}
+              className={'popup-item spaced ' + (isSubscript ? 'active' : '')}
+              aria-label="Format Subscript">
+              <i className="ri-subscript"></i>
+            </Button>
+          </Tooltip>
+
+          <Tooltip text="Superscript">
+            <Button
+              size="M"
+              variant="BlueContStyle"
+              type="button"
+              onClick={() => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'superscript');
+              }}
+              className={'popup-item spaced ' + (isSuperscript ? 'active' : '')}
+              aria-label="Format Superscript">
+              <i className="ri-superscript"></i>
+            </Button>
+          </Tooltip>
+
+          <Tooltip text="Uppercase">
+            <Button
+              size="M"
+              variant="BlueContStyle"
+              type="button"
+              onClick={() => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'uppercase');
+              }}
+              className={'popup-item spaced ' + (isUppercase ? 'active' : '')}
+              aria-label="Format text to uppercase">
+              <i className="format uppercase" />
+            </Button>
+          </Tooltip>
+
+          <Tooltip text="Lowercase">
+            <Button
+              size="M"
+              variant="BlueContStyle"
+              type="button"
+              onClick={() => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'lowercase');
+              }}
+              className={'popup-item spaced ' + (isLowercase ? 'active' : '')}
+              aria-label="Format text to lowercase">
+              <i className="format lowercase" />
+            </Button>
+          </Tooltip>
+
+          <Tooltip text="Capitalize">
+            <Button
+              size="M"
+              variant="BlueContStyle"
+              type="button"
+              onClick={() => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'capitalize');
+              }}
+              className={'popup-item spaced ' + (isCapitalize ? 'active' : '')}
+              aria-label="Format text to capitalize">
+              <i className="ri-font-size-2"></i>
+            </Button>
+          </Tooltip>
+
+          <Tooltip text="Insert code block">
+            <Button
+              size="M"
+              variant="BlueContStyle"
+              type="button"
+              onClick={() => {
+                editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code');
+              }}
+              className={'popup-item spaced ' + (isCode ? 'active' : '')}
+              aria-label="Insert code block">
+              <i className="ri-code-line"></i>
+            </Button>
+          </Tooltip>
+
+          <Tooltip text="Insert link">
+            <Button
+              size="M"
+              variant="BlueContStyle"
+              type="button"
+              onClick={insertLink}
+              className={'popup-item spaced ' + (isLink ? 'active' : '')}
+              aria-label="Insert link">
+              <i className="ri-link"></i>
+            </Button>
+          </Tooltip>
         </>
       )}
-      <button
+      {/*       <button
         type="button"
         onClick={insertComment}
         className={'popup-item spaced insert-comment'}
         title="Insert comment"
         aria-label="Insert comment">
         <i className="format add-comment" />
-      </button>
+      </button> */}
     </div>
   );
 }

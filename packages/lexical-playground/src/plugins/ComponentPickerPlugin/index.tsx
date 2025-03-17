@@ -6,6 +6,8 @@
  *
  */
 
+/* TODO here is the / component picker */
+
 import type {JSX} from 'react';
 
 import {$createCodeNode} from '@lexical/code';
@@ -148,7 +150,7 @@ type ShowModal = ReturnType<typeof useModal>[1];
 
 function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
   return [
-    new ComponentPickerOption('Paragraph', {
+    new ComponentPickerOption('Paragraphs', {
       icon: <i className="icon paragraph" />,
       keywords: ['normal', 'paragraph', 'p', 'text'],
       onSelect: () =>
